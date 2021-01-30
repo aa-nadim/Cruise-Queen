@@ -28,13 +28,11 @@
     </header>
 
     <!--Booking Section-->
-    <main class="main-content container">
-
+    <main id="BookingForm" class="main-content container">
         <div class="booking-content">
             <h1>Cruise Queen</h1>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book./p>
         </div>
-
 
         <div class="booking-form">
             <h3>Book Ocean Time</h3>
@@ -109,15 +107,35 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <button id="BookNow" class="btn-style">Book Now</button>
         </div>
     </main>
+    <div id="BookingArea" class="booking-message">
+        <div>
+            <h1>Thank You for booking these tickets</h1>
+            <h3>First Class = $150.</h3>
+            <h3>Economy Class = $100.</h3>
+            <h3>Vat  = 10%.</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius nostrum quis ratione quasi et autem esse animi error perspiciatis sed repellat, illo amet beatae iste numquam illum culpa provident reprehenderit!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati excepturi tempore nulla ipsum odit quibusdam doloribus officiis cupiditate ab voluptatum iusto minus sapiente, hic odio optio magni recusandae incidunt illum?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea culpa, nam ut eveniet placeat soluta nemo aliquam reprehenderit corporis autem, odio totam impedit distinctio perspiciatis. Eaque excepturi doloremque porro enim voluptate qui animi aspernatur, nihil quis quidem laudantium nesciunt voluptas consequatur natus maiores libero, eligendi id iste eius incidunt accusantium explicabo odit? Molestias enim vero quis voluptatum alias! Ipsam quaerat repellat cupiditate qui delectus maxime cum autem quasi, expedita sint, aut totam perferendis aspernatur eius atque ut doloremque, fuga ab blanditiis ipsum error iste voluptates impedit? Tenetur hic natus exercitationem quasi quae deserunt laboriosam numquam possimus cum vero dicta doloremque molestias corporis reprehenderit, vel recusandae, debitis ipsa totam fuga laborum quam modi voluptates sapiente! Soluta nisi nihil quo corporis magnam sequi aliquam, architecto mollitia nemo cum iure odit voluptatum fugit! Blanditiis quos officiis quo eaque recusandae quaerat, incidunt ad voluptatum ab! Tenetur quos dolores suscipit nemo corporis rem porro eum sunt dolorem blanditiis quas nam alias ex natus sapiente, voluptate voluptas. Est nostrum voluptatibus porro dignissimos necessitatibus! Natus, adipisci, velit esse suscipit culpa eaque ad ipsa necessitatibus labore reprehenderit excepturi aliquam quasi, veniam fugiat repellendus cupiditate. Veniam fugiat aliquid sapiente dolore autem pariatur doloremque qui similique error! Nam consectetur, sed magni autem nobis cum amet nemo. Voluptate et cupiditate rerum dolorem, doloribus asperiores aperiam. Optio error consequatur atque vel! Quaerat dolorem nesciunt quam! Nisi quam, reiciendis qui unde natus vel. Officiis earum alias possimus nobis in sed magni, repellat repellendus nulla fuga quas, asperiores non molestias reiciendis inventore modi ea voluptatibus iusto voluptate atque! Cum ullam nulla quasi tempora ratione natus ipsa necessitatibus, explicabo facilis illum odio enim eos hic ad ex unde earum ea sint ducimus. Aliquam adipisci, amet rem quos cupiditate temporibus aspernatur repellat odit? Porro, tempora nam sunt inventore maiores cupiditate aliquid ipsum atque aperiam ex nobis.</p>
+        </div>
+    </div>
 
     <script>
          let FirstClassNumber = 0;
          let EconomyClassNumber = 0;
          let FirstClassPrice = 0;
          let EconomyClassPrice = 0;
+        // BookNow button event handler
+        const BookNowBtn = document.getElementById("BookNow");
+        BookNowBtn.addEventListener("click", function(){
+            const bookingForm = document.getElementById("BookingForm");
+            bookingForm.style.display = "none";
+
+            const bookingArea = document.getElementById("BookingArea");
+            bookingArea.style.display = "block";
+        })
          // +_1 button event handler
          const FirstClassPlusBtn = document.getElementById("FirstClassPlus");
          FirstClassPlusBtn.addEventListener("click", function(){
@@ -159,15 +177,12 @@
         }
         function ticketsPrice(){
             const subtotalprice = document.getElementById("Subtotal").innerText;
-            //const subtotalpriceNumber = parseFloat(subtotalprice);
             document.getElementById("Subtotal").innerText = FirstClassPrice + EconomyClassPrice;
 
             const vatAmount = document.getElementById("Vat").innerText;
-            //const vatNumber = parseFloat(vatAmount);
             document.getElementById("Vat").innerText = (FirstClassPrice + EconomyClassPrice)/10;
 
             const totalAmount = document.getElementById("Total").innerText;
-            //const vatNumber = parseFloat(vatAmount);
             document.getElementById("Total").innerText = FirstClassPrice + EconomyClassPrice + (FirstClassPrice + EconomyClassPrice)/10;
         }
         
