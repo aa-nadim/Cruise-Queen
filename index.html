@@ -10,10 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet">
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body style="background-image: url('images/ship.png');">
     <!--Header and Menu Section-->
     <header class="container">
         <nav>
@@ -58,20 +59,26 @@
             <div class="input-group f-class">
                 <div>
                     <label for="">First Class ($150)</label>
-                    <input class="inp-style inp-width" type="number" name="">
+                    <input id="FirstClassAmount" class="inp-style inp-width" type="number" name="" value="0">
                 </div>
-                <div class="plus-minus-btn">
-                    <p>+ -</p>
+                <div class="plus-minus-btn  mt-5">
+                    <p> 
+                        <button id="FirstClassPlus" class="btn btn-success">+</button>
+                        <button id="FirstClassMinus" class="btn btn-success">-</button>
+                    </p>
                 </div>
             </div>
             
             <div class="input-group f-class">
                 <div>
                     <label for="">Economy ($100)</label>
-                    <input class="inp-style inp-width" type="number" name="">
+                    <input id="EconomyClassAmount"  class="inp-style inp-width" type="number" name="" value="0">
                 </div>
-                <div class="plus-minus-btn">
-                    <p> <span>+</span> <span>-</span> </p>
+                <div class="plus-minus-btn  mt-5">
+                    <p> 
+                        <button id="EconomyClassPlus" class="btn btn-success">+</button>
+                        <button id="EconomyClassMinus" class="btn btn-success">-</button>
+                    </p>
                 </div>
             </div>
             <div class="calculations">
@@ -80,7 +87,7 @@
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p>$500</p>
+                        <p>$ <span id="Subtotal">00</span></p>
                     </div>
                 </div>
 
@@ -89,7 +96,7 @@
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p>$50</p>
+                        <p>$ <span id="Vat">00</span></p>
                     </div>
                 </div>
                 <hr>
@@ -98,7 +105,7 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$550</p>
+                        <p>$ <span id="Total">00</span></p>
                     </div>
                 </div>
             </div>
@@ -106,7 +113,67 @@
         </div>
     </main>
 
+    <script>
+         let FirstClassNumber = 0;
+         let EconomyClassNumber = 0;
+         let FirstClassPrice = 0;
+         let EconomyClassPrice = 0;
+         // +_1 button event handler
+         const FirstClassPlusBtn = document.getElementById("FirstClassPlus");
+         FirstClassPlusBtn.addEventListener("click", function(){
+            ticketsNumber("FirstClassAmount",1,true);
+         })
+         // -_1 button event handler
+         const FirstClassMinusBtn = document.getElementById("FirstClassMinus");
+         FirstClassMinusBtn.addEventListener("click", function(){
+            ticketsNumber("FirstClassAmount", -1,true);
+         })
+        // +_2 button event handler
+        const EconomyClassPlusBtn = document.getElementById("EconomyClassPlus");
+        EconomyClassPlusBtn.addEventListener("click", function(){
+            ticketsNumber("EconomyClassAmount",1,false);
+         })
+         // -_2 button event handler
+         const EconomyClassMinusBtn = document.getElementById("EconomyClassMinus");
+         EconomyClassMinusBtn.addEventListener("click", function(){
+           ticketsNumber("EconomyClassAmount",-1,false);
+         })
+         function ticketsNumber(id,num,isFirst){
+            const amount = document.getElementById(id).value;
+            const amountNumber = parseFloat(amount);
+            if(amountNumber == 0 && num == -1)num=0;
+
+            let ticketsAmout = amountNumber + num*1
+            if(isFirst == true){
+                FirstClassNumber = ticketsAmout;
+                FirstClassPrice = 150 * FirstClassNumber;
+                //console.log("FirstClassPrice",FirstClassPrice);
+            }
+            else{
+                EconomyClassNumber = ticketsAmout;
+                EconomyClassPrice = 100 * EconomyClassNumber;
+                //console.log("EconomyClassPrice",EconomyClassPrice);
+            }
+            document.getElementById(id).value = ticketsAmout;
+            ticketsPrice();
+        }
+        function ticketsPrice(){
+            const subtotalprice = document.getElementById("Subtotal").innerText;
+            //const subtotalpriceNumber = parseFloat(subtotalprice);
+            document.getElementById("Subtotal").innerText = FirstClassPrice + EconomyClassPrice;
+
+            const vatAmount = document.getElementById("Vat").innerText;
+            //const vatNumber = parseFloat(vatAmount);
+            document.getElementById("Vat").innerText = (FirstClassPrice + EconomyClassPrice)/10;
+
+            const totalAmount = document.getElementById("Total").innerText;
+            //const vatNumber = parseFloat(vatAmount);
+            document.getElementById("Total").innerText = FirstClassPrice + EconomyClassPrice + (FirstClassPrice + EconomyClassPrice)/10;
+        }
+        
+    </script>
     <!--Thank You-->
+    <script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>
